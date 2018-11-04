@@ -3,7 +3,7 @@
 import mongoose from 'mongoose';
 require('mongoose-schema-jsonschema')(mongoose);
 
-const categories = mongoose.Schema({
+const categories = new mongoose.Schema({
   name: {type:String, require: true},
   display_name: {type:String, require: true},
   description: {type:String},
@@ -27,15 +27,30 @@ categories.pre('find', function() {
 });
 
 categories.pre('validate', function() {
-  console.log('Validating...');
+  try {
+    console.log('Validating...');
+  }
+  catch(e) {
+    console.error(e);
+  }
 });
 
 categories.pre('save', function() {
-  console.log('Saving...', this);
+  try {
+    console.log('Saving...', this);
+  }
+  catch(e) {
+    console.error(e);
+  }
 });
 
 categories.post('save', function() {
-  console.log('Saved!', this);
+  try {
+    console.log('Saved!', this);
+  }
+  catch(e) {
+    console.error(e);
+  }
 });
 
 export default mongoose.model('categories', categories);
