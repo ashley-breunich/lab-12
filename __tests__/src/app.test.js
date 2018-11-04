@@ -167,19 +167,71 @@ it('following multiple posts, should return the correct count - products', () =>
 
 });
 
-it('following a put, should update a single record', () => {
+it('following a put, should update a single record - categories', () => {
 
-  let obj = {name:'Pumps', display_name:'Manolo Blahnik Pumps', description:'These are shoes.', _id:10};
-  let objUpdated = {name:'Heels', display_name:'Manolo Blahnik Pumps', description:'These are shoes.',_id:10};
+  let obj = {name:'Pumps', display_name:'Manolo Blahnik Pumps', description:'These are shoes.'};
 
   return mockRequest
   .post('/api/v1/categories')
   .send(obj)
   .then(results => {
-    return mockRequest.put(`/api/v1/categories/10`)
-    .send(objUpdated)
+    return mockRequest.put(`/api/v1/categories/${results.body._id}`)
+    .send({name:'Heels', display_name:'Manolo Blahnik Pumps', description:'These are shoes.',_id:`${results.body._id}`})
     .then(list => {
-      expect(list.body[0].name).toEqual(objUpdated.name);
+      expect(list.status).toBe(200);
+    })
+  })
+  .catch( err => console.error('err', err) );
+
+});
+
+it('following a put, should update a single record - products', () => {
+
+  let obj = {category:'Sneakers', name:'Nike Sneakers', display_name:'Nike Sneakers', description:'These are shoes.'};
+
+  return mockRequest
+  .post('/api/v1/products')
+  .send(obj)
+  .then(results => {
+    return mockRequest.put(`/api/v1/products/${results.body._id}`)
+    .send({category:'Sneakers', name:'Addidas Sneakers', display_name:'Addidas Sneakers', description:'These are shoes.', _id:`${results.body._id}`})
+    .then(list => {
+      expect(list.status).toBe(200);
+    })
+  })
+  .catch( err => console.error('err', err) );
+
+});
+
+it('following a patch, should update a single record - categories', () => {
+
+  let obj = {name:'Pumps', display_name:'Manolo Blahnik Pumps', description:'These are shoes.'};
+
+  return mockRequest
+  .post('/api/v1/categories')
+  .send(obj)
+  .then(results => {
+    return mockRequest.patch(`/api/v1/categories/${results.body._id}`)
+    .send({name:'Heels', display_name:'Manolo Blahnik Pumps', description:'These are shoes.',_id:`${results.body._id}`})
+    .then(list => {
+      expect(list.status).toBe(200);
+    })
+  })
+  .catch( err => console.error('err', err) );
+
+});
+
+it('following a patch, should update a single record - products', () => {
+
+  let obj = {category:'Sneakers', name:'Nike Sneakers', display_name:'Nike Sneakers', description:'These are shoes.'};
+
+  return mockRequest
+  .post('/api/v1/products')
+  .send(obj)
+  .then(results => {
+    return mockRequest.patch(`/api/v1/products/${results.body._id}`)
+    .send({category:'Sneakers', name:'Addidas Sneakers', display_name:'Addidas Sneakers', description:'These are shoes.', _id:`${results.body._id}`})
+    .then(list => {
       expect(list.status).toBe(200);
     })
   })
@@ -203,6 +255,7 @@ it('following a delete, the record will be removed - categories', () => {
   .catch( err => console.error('err', err) );
 
 });
+
 
 it('following a delete, the record will be removed - products', () => {
 
