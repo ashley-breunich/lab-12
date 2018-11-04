@@ -11,15 +11,15 @@ const products = mongoose.Schema({
 });
 
 products.pre('validate', function() {
-  console.log('Validating some stuff');
+  console.log('Validating...');
 });
 
 products.pre('save', function() {
-  console.log('About to save some stuff', this);
+  console.log('Saving...', this);
 });
 
 products.post('save', function() {
-  console.log('Saved', this);
+  console.log('Saved!', this);
 });
 
 export default mongoose.model('products', products);

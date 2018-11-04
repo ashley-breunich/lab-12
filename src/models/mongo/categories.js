@@ -10,15 +10,15 @@ const categories = mongoose.Schema({
 });
 
 categories.pre('validate', function() {
-  console.log('Validating some stuff');
+  console.log('Validating...');
 });
 
 categories.pre('save', function() {
-  console.log('About to save some stuff', this);
+  console.log('Saving...', this);
 });
 
 categories.post('save', function() {
-  console.log('Saved', this);
+  console.log('Saved!', this);
 });
 
 export default mongoose.model('categories', categories);
