@@ -1,4 +1,4 @@
-!https://www.travis-ci.com/ashley-breunich/lab-12.svg?branch=master!:https://www.travis-ci.com/ashley-breunich/lab-12
+[![Build Status](https://www.travis-ci.com/ashley-breunich/lab-12.svg?branch=master)](https://www.travis-ci.com/ashley-breunich/lab-12)
 
 ![CF](http://i.imgur.com/7v5ASc8.png) LAB - ORM: Advanced Modeling
 =================================================
